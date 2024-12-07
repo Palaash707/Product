@@ -8,13 +8,9 @@ import (
 )
 
 func main() {
-    // Connect to the database
-    err := db.ConnectDB()
-    if err != nil {
-        log.Fatalf("Failed to connect to DB: %v", err)
-    }
+    db.ConnectDB()
 
-    // Set up and start the server
     router := api.SetupRouter()
+    log.Println("Server running at http://localhost:8080")
     router.Run(":8080")
 }

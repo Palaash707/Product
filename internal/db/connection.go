@@ -2,17 +2,25 @@ package db
 
 import (
 	"database/sql"
+	"log"
 
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq" // PostgreSQL driver
 )
 
 var DB *sql.DB
 
-func ConnectDB() error {
+// ConnectDB establishes the database connection
+func ConnectDB() {
     var err error
-    DB, err = sql.Open("postgres", "user=postgres dbname=postgres password=something sslmode=disable")
+    DB, err = sql.Open("postgres", "host=localhost port=5432 user=postgres password=something dbname=productdb sslmode=disable")
     if err != nil {
-        return err
+        log.Fatalf("Error connecting to database: %v", err)
     }
-    return DB.Ping()
+
+    // Check if the connection works
+    if err = DB.Ping(); err != nil {
+        log.Fatalf("Cannot reach database: %v", err)
+    }
+
+    log.Println("Connected to database successfully")
 }
