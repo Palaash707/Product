@@ -3,11 +3,15 @@ package main
 import (
 	"log"
 
+	"github.com/Palaash707/Product/internal/logging"
+
 	"github.com/Palaash707/Product/internal/api"
 	"github.com/Palaash707/Product/internal/db"
 )
 
 func main() {
+     // Initialize logger
+     logging.InitLogger()
     // Initialize the database connection
     db.ConnectDB()
 
