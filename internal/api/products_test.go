@@ -1,7 +1,7 @@
 package api
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -24,7 +24,7 @@ func TestGetProductsPagination(t *testing.T) {
     resp := performRequest(router, req)
 
     // Read the response body
-    body, err := ioutil.ReadAll(resp.Body)
+    body, err := io.ReadAll(resp.Body)
     if err != nil {
         t.Fatalf("Failed to read response body: %v", err)
     }

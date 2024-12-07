@@ -8,9 +8,14 @@ import (
 )
 
 func main() {
+    // Initialize the database connection
     db.ConnectDB()
 
+    // Set up routes
     router := api.SetupRouter()
-    log.Println("Server running at http://localhost:8080")
-    router.Run(":8080")
+
+    // Start the server
+    if err := router.Run(":8080"); err != nil {
+        log.Fatal("Server failed to start:", err)
+    }
 }

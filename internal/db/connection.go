@@ -9,15 +9,15 @@ import (
 
 var DB *sql.DB
 
-// ConnectDB establishes the database connection
+// ConnectDB initializes the database connection
 func ConnectDB() {
     var err error
+    // Update the connection string with your credentials
     DB, err = sql.Open("postgres", "host=localhost port=5432 user=postgres password=something dbname=productdb sslmode=disable")
     if err != nil {
         log.Fatalf("Error connecting to database: %v", err)
     }
 
-    // Check if the connection works
     if err = DB.Ping(); err != nil {
         log.Fatalf("Cannot reach database: %v", err)
     }
